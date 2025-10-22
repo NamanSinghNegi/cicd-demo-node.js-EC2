@@ -35,18 +35,18 @@ jobs:
       - name: Login to ECR
         run: |
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | \
-          docker login --username AWS --password-stdin 123456789012.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+          docker login --username AWS --password-stdin 538780774226.dkr.ecr.ap-south-1.amazonaws.com/my-node-app
 
       # 6️⃣ Build and tag Docker image
       - name: Build Docker image
         run: |
           docker build -t my-node-app:latest .
-          docker tag my-node-app:latest 123456789012.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-node-app:latest
+          docker tag my-node-app:latest 538780774226.dkr.ecr.ap-south-1.amazonaws.com/my-node-app
 
       # 7️⃣ Push Docker image to ECR
       - name: Push Docker image to ECR
         run: |
-          docker push 123456789012.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-node-app:latest
+          docker push 538780774226.dkr.ecr.ap-south-1.amazonaws.com/my-node-app
 
       # 8️⃣ Deploy to EC2 via SSH
       - name: Deploy to EC2
@@ -58,10 +58,10 @@ jobs:
           script: |
             # Login to ECR from EC2
             aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | \
-            docker login --username AWS --password-stdin 123456789012.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+            docker login --username AWS --password-stdin 538780774226.dkr.ecr.ap-south-1.amazonaws.com/my-node-app
             
             # Pull the latest image
-            docker pull 123456789012.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-node-app:latest
+            docker pull 538780774226.dkr.ecr.ap-south-1.amazonaws.com/my-node-app
             
             # Stop & remove old container if exists
             docker stop myapp || true && docker rm myapp || true
