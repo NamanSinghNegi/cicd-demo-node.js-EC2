@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           install -m 600 -D /dev/null ~/.ssh/id_rsa
-          echo "${{ secrets.EC2_SSH_KEY1 }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.EC2_SSH_KEY_NEW }}" > ~/.ssh/id_rsa
           echo "${{ secrets.EC2_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
 
       - name: Test SSH connection
